@@ -62,7 +62,6 @@ require "phelpobject"
 require "addxml"
 require "stringfuncs"
 require "miniwin"
-require "socket"
 require "ldplugin"
 
 Pluginhelper = Phelpobject:subclass()
@@ -1022,11 +1021,11 @@ function timer_start(name)
   if phelper.time and starttime[name] then
     print(name, 'already had a starttime')
   end
-  starttime[name] = socket.gettime()
+  starttime[name] = os.time() * 1000
 end
 
 function timer_end(name)
-  local endtime = socket.gettime()
+  local endtime = os.time() * 1000
   if phelper.time then
     if not starttime[name] then
       print('could not find starttime for', name)
