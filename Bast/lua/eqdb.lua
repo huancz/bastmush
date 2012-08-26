@@ -801,7 +801,7 @@ function EQdb:updateitemident(item)
     local titem = self:getitemdetails(tonumber(item.id))
     local tchanges = self.db:total_changes()
     if titem then
-      assert (self.db:exec("BEGIN TRANSACTION"))
+      -- assert (self.db:exec("BEGIN TRANSACTION"))
       local stmtupd = self.db:prepare[[ UPDATE itemdetails SET
                                                   keywords = :keywords,
                                                   material = :material,
@@ -821,7 +821,7 @@ function EQdb:updateitemident(item)
       if item.note then
         self:addnote(item.id, item.note, true)
       end
-      assert (self.db:exec("COMMIT"))
+      -- assert (self.db:exec("COMMIT"))
     end
     phelper:mdebug('changes:', self.db:total_changes() - tchanges)
     self:close()
@@ -883,11 +883,11 @@ function EQdb:moveitem(item, container)
   timer_start('EQdb:moveitem')
   self:checkitemstable()
   if self:open('moveitem') then
-    assert (self.db:exec("BEGIN TRANSACTION"))
+    -- assert (self.db:exec("BEGIN TRANSACTION"))
     self.db:exec(string.format("UPDATE items SET containerid = '%s', wearslot = %d, place = (SELECT MIN(place) - 1 from items where containerid = '%s') where serial = %d;",
                                      tostring(container), tonumber(item.wearslot),
                                      tostring(container), tonumber(item.serial)))
-    assert (self.db:exec("COMMIT"))
+    -- assert (self.db:exec("COMMIT"))
     self:close('moveitem')
   end
   timer_end('EQdb:moveitem')
@@ -897,10 +897,10 @@ function EQdb:wearitem(item, wearloc)
   timer_start('EQdb:wearitem')
   self:checkitemstable()
   if self:open('wearitem') then
-    assert (self.db:exec("BEGIN TRANSACTION"))
+    -- assert (self.db:exec("BEGIN TRANSACTION"))
     self.db:exec(string.format("UPDATE items SET containerid = 'Worn', wearslot = %d, place = -2 where serial = %d;",
                                      tonumber(item.wearslot),  tonumber(item.serial)))
-    assert (self.db:exec("COMMIT"))
+    -- assert (self.db:exec("COMMIT"))
     self:close('wearitem')
   end
   timer_end('EQdb:wearitem')
@@ -912,7 +912,7 @@ function EQdb:updateitem(item)
   local tchanges = 0
   if self:open('updateitem') then
     tchanges = self.db:total_changes()
-    assert (self.db:exec("BEGIN TRANSACTION"))
+    -- assert (self.db:exec("BEGIN TRANSACTION"))
     self.db:exec(string.format([[UPDATE items SET shortflags = '%s',
                                                   level = %d,
                                                   cname = %s,
@@ -926,7 +926,7 @@ function EQdb:updateitem(item)
                                      fixsql(tostring(item.cname)), fixsql(tostring(item.name)), tonumber(item.type),
                                      tostring(item.containerid), tonumber(item.wearslot),
                                      tonumber(item.place), tonumber(item.serial)))
-    assert (self.db:exec("COMMIT"))
+    -- assert (self.db:exec("COMMIT"))
     --print('rows changed', self.db:total_changes() - tchanges)
     self:close('updateitem')
   end
@@ -1054,7 +1054,7 @@ function EQdb:addidentifier(itemsn, identifier)
     if self:open('addidentifier') then
       local titem = self:getitemdetails(tonumber(item.serial))
       tchanges = self.db:total_changes()
-      assert (self.db:exec("BEGIN TRANSACTION"))
+      -- assert (self.db:exec("BEGIN TRANSACTION"))
       local stmt = self.db:prepare[[
         INSERT or REPLACE into identifier VALUES (
         :serial,
@@ -1064,7 +1064,7 @@ function EQdb:addidentifier(itemsn, identifier)
       stmt:bind_names( identm )
       stmt:step()
       stmt:finalize()
-      assert (self.db:exec("COMMIT"))
+      -- assert (self.db:exec("COMMIT"))
       tchanges = self.db:total_changes() - tchanges
       self:close('addidentifier')
     end

@@ -66,9 +66,9 @@ function Sqlitedb:checkversiontable()
   if self:open('checkversiontable') then
     if not self:checkfortable('version') then
       self.db:exec(self.createtablesql['version'])
-      assert (self.db:exec("BEGIN TRANSACTION"))
+      -- assert (self.db:exec("BEGIN TRANSACTION"))
       local stmt = self.db:exec(string.format('INSERT INTO version VALUES (NULL, %d)', self.version))
-      assert (self.db:exec("COMMIT"))
+      -- assert (self.db:exec("COMMIT"))
     end
     self:close('checkversiontable')
   end
