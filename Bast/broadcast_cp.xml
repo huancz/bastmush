@@ -198,23 +198,23 @@ Broadcast 3
 <include name="constants.lua"/>
 
 <triggers>
-  <trigger
+  <!--trigger
    enabled="y"
    match="Welcome to Aardwolf. May your adventures be mystical, challenging and rewarding."
    sequence="100"
    send_to="10"
   >
   <send>cp check</send>
-  </trigger>
+  </trigger-->
 
-  <trigger
+  <!--trigger
    enabled="y"
    match="############# Reconnecting to Game #############"
    sequence="100"
    send_to="10"
   >
   <send>cp check</send>
-  </trigger>
+  </trigger-->
 
   <trigger
    enabled="y"
@@ -223,7 +223,7 @@ Broadcast 3
    send_to="10"
    script="cp_new"
   >
-  <send>cp check</send>
+  <!--send>cp check</send-->
   </trigger>
 
   <trigger
@@ -243,7 +243,7 @@ Broadcast 3
    script="cp_time"
    sequence="100"
    group="campaigncheck"
-   omit_from_output="y"
+   omit_from_output="n"
   >
   </trigger>
 
@@ -255,7 +255,7 @@ Broadcast 3
    sequence="100"
    regexp="y"
    group="campaigncheck"
-   omit_from_output="y"
+   omit_from_output="n"
   >
   </trigger>
 

@@ -194,7 +194,7 @@ You are not on a global quest.
    sequence="100"
    regexp="y"
    group="gqcheck"
-   omit_from_output="y"
+   omit_from_output="n"
   >
   </trigger>
 

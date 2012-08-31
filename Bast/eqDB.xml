@@ -1059,7 +1059,7 @@ identpeg = (P("id") * -P(1)) + (P("ide") * -P(1)) + (P("iden") * -P(1)) + (P("id
 alldotpeg = (P("all") * P(".") * P(1)^1) + (P("all") * P(".") * -P(1))
 inpeg = (P("i") * -P(1)) + (P("in") * -P(1))
 
-function OnPluginSend (sText)
+--[[function OnPluginSend (sText)
   if char and char.status and tonumber(char.status.state) == 5 then
     return true
   end
@@ -1176,6 +1176,8 @@ function OnPluginSend (sText)
   timer_end('eqDB:OnPluginSend')
   return true
 end
+]]
+
 ]]>
 </script>
 

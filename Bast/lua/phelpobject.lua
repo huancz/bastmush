@@ -47,6 +47,9 @@ function getversion()
 end
 
 function checkLocalFile()
+    return
+
+    --[[
     -- open the local version file
     local changesfile = scan_dir_for_file (GetInfo(60), "BastmushChanges.txt")
 
@@ -69,6 +72,7 @@ function checkLocalFile()
     end
     version_file:close ()
     return true
+    ]]
 end
 
 

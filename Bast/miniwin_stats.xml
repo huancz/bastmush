@@ -2035,6 +2035,10 @@ function OnPluginBroadcast (msg, id, name, text)
             end
           end
         end
+      else
+        if (not char['base']) then
+          Send("protocols gmcp sendbase")
+        end
       end
     end
   else

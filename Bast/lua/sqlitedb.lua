@@ -158,6 +158,8 @@ function Sqlitedb:dbcheck (code)
 end -- dbcheck
 
 function Sqlitedb:backupdb(extension)
+  return
+  --[[
   --in_backup = true
   local dbpath = self.dbloc .. self.dbname
   Note("PERFORMING DATABASE BACKUP. DON'T TOUCH ANYTHING!")
@@ -217,6 +219,7 @@ function Sqlitedb:backupdb(extension)
   ChangeDir(GetInfo(66)) -- Go back to default directory
   Note("FINISHED DATABASE BACKUP. YOU MAY NOW GO BACK TO MUDDING.")
   --in_backup = false
+  ]]
 end
 
 function Sqlitedb:getcolumnsfromsql(tablename)

@@ -56,7 +56,8 @@ function EQdb:turnonpragmas()
   -- PRAGMA foreign_keys = ON;
   self.db:exec("PRAGMA foreign_keys=1;")
   -- PRAGMA journal_mode=WAL
-  self.db:exec("PRAGMA journal_mode=WAL;")
+  self.db:exec("PRAGMA journal_mode=DELETE;")
+  self.db:exec("PRAGMA synchronous=0;")
 end
 
 function EQdb:checkitemstable()
