@@ -655,13 +655,11 @@ function getitemdetails(id, override)
     local titem2 = db:getitem(id)
     if titem2 then
       togglehideoutput("y")
-      if titem2.containerid == 'Inventory' then
-        Execute('identify ' .. tostring(id))
-      elseif titem2.containerid == 'Worn' then
-        Execute('identify ' .. tostring(id) .. ' worn')
+      if titem2.containerid == 'Inventory' or titem2.containerid == 'Worn' then
+        Execute('invdetails ' .. tostring(id))
       else
         putobjectininv(titem2)
-        Execute('identify ' .. tostring(id))
+        Execute('invdetails ' .. tostring(id))
         putobjectincontainer(titem2, titem2.containerid)
       end
     end
